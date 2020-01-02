@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:height="http://www.w3.org/1999/xhtml">
+<head>
+    <title>发布</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="/js/bootstrap.min.js" type="application/javascript"></script>
+    <link rel="stylesheet" href="/css/mycommunity.css">
+
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">这是首页</span>
+            </button>
+            <a class="navbar-brand" href="#">这是首页</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <form class="navbar-form navbar-left">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="搜索内容">
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                <!--第一个参数前用？后面的参数用&-->
+                <li>
+                    <a href="https://github.com/login/oauth/authorize?client_id=7fa453e944eff08606b4&redirect_uri=http://localhost:8080/callback&scope=user&state=1">登录</a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">Dropdown <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">消息中心</a></li>
+                        <li><a href="#">个人中心</a></li>
+                        <li><a href="#">退出登录</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container-fluid main">
+    <div class="row">
+        <div calss="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+            <h2>
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 发起
+            </h2>
+            <hr>
+            <form>
+                <div class="form-group">
+                    <label for="title">问题标题（简明扼要）</label>
+                    <input type="text" class="form-control" id="title" name="title" placeholder="请输入问题标题">
+                    <div class="dropdown">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            Dropdown
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
+                        </ul>
+                    </div><!--下拉框-->
+                </div>
+                <div class="form-group">
+                    <label for="title">问题补充（必填，请参照右侧提示）：</label><!--</label>里的for="title"与后面的id="description"对应-->
+                    <textarea name="description" id="description" class="form-control" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="title">添加标签</label>
+                    <input type="text" class="form-control" id="tag" name="tag" placeholder="输入标签以，隔开">
+                </div>
+                <button type="submit" class="btn btn-success btn-publish">发布</button>
+            </form>
+        </div>
+        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+            <h3>发起问题指南</h3>
+            1.问题标题：不超过25字
+            2.问题补充：补充
+            3.标签选择：选择一个或者多个何时的标签，用逗号隔开，g
+        </div>
+    </div>
+</div>
+</body>
+</html>

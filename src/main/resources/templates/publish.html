@@ -5,8 +5,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <script src="/js/bootstrap.min.js" type="application/javascript"></script>
-    <link rel="stylesheet" href="/css/mycommunity.css">
+    <script src="js/bootstrap.min.js" type="application/javascript"></script>
+    <link rel="stylesheet" href="css/mycommunity.css">
 
 </head>
 <body>
@@ -32,6 +32,9 @@
                 <li>
                     <a href="https://github.com/login/oauth/authorize?client_id=7fa453e944eff08606b4&redirect_uri=http://localhost:8080/callback&scope=user&state=1">登录</a>
                 </li>
+                <li>
+                    <a href="/publish">发布</a>
+                </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">Dropdown <span class="caret"></span></a>
@@ -52,10 +55,10 @@
                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 发起
             </h2>
             <hr>
-            <form>
+            <form action="/publish" method="post">
                 <div class="form-group">
                     <label for="title">问题标题（简明扼要）</label>
-                    <input type="text" class="form-control" id="title" name="title" placeholder="请输入问题标题">
+                    <input type="text" class="form-control" th:value="${title}" id="title" name="title"  placeholder="输入标签以，隔开" >
                     <div class="dropdown">
                         <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -73,20 +76,27 @@
                 </div>
                 <div class="form-group">
                     <label for="title">问题补充（必填，请参照右侧提示）：</label><!--</label>里的for="title"与后面的id="description"对应-->
-                    <textarea name="description" id="description" class="form-control" rows="3"></textarea>
+                    <textarea name="description" id="description" class="form-control" rows="3" th:text="${description}"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="title">添加标签</label>
-                    <input type="text" class="form-control" id="tag" name="tag" placeholder="输入标签以，隔开">
+                    <input type="text" class="form-control" id="tag" name="tag" th:value="${tag}" placeholder="输入标签以，隔开">
                 </div>
-                <button type="submit" class="btn btn-success btn-publish">发布</button>
+                <div class="container-fluid main">
+                    <div class="row">
+                        <div class="alert alert-danger col-lg-9 col-md-12 col-sm-12 col-xs-12" role="alert" th:text="${error}" th:if="${error != null}"></div>
+                        <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                            <button type="submit" class="btn btn-success btn-publish">发布</button>
+                        </div>
+                    </div>
+                </div>
             </form>
         </div>
         <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
             <h3>发起问题指南</h3>
-            1.问题标题：不超过25字
-            2.问题补充：补充
-            3.标签选择：选择一个或者多个何时的标签，用逗号隔开，g
+            1.问题标题：不超过25字<br>
+            2.问题补充：补充<br>
+            3.标签选择：选择一个或者多个何时的标签，用逗号隔开<br>
         </div>
     </div>
 </div>

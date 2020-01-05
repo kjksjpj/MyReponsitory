@@ -34,7 +34,7 @@ public class AuthorizeController {
         modelUser.setName("fudejun");
         modelUser.setGmtCreate(System.currentTimeMillis());
         modelUser.setGmtModified(modelUser.getGmtCreate());
-        modelUser.setAccount_id("accounted");
+        modelUser.setAccountId("accounted");
         userMapper.insert(modelUser);
         System.out.println();
 

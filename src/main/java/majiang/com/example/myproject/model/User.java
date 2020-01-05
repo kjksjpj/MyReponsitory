@@ -3,7 +3,7 @@ package majiang.com.example.myproject.model;
 public class User {
     private Integer id;
     private String name;
-    private String account_id;
+    private String accountId;
     private String token;
     private Long gmtCreate;
     private Long gmtModified;
@@ -24,12 +24,12 @@ public class User {
         this.name = name;
     }
 
-    public String getAccount_id() {
-        return account_id;
+    public String getAccountId() {
+        return accountId;
     }
 
-    public void setAccount_id(String account_id) {
-        this.account_id = account_id;
+    public void setAccountId(String accountId) {
+        this.accountId = accountId;
     }
 
     public String getToken() {
@@ -61,7 +61,7 @@ public class User {
         return "User{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", accountId='" + account_id + '\'' +
+                ", accountId='" + accountId + '\'' +
                 ", token='" + token + '\'' +
                 ", gmtCreate=" + gmtCreate +
                 ", gmtModified=" + gmtModified +

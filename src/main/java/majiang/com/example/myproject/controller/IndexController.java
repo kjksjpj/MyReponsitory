@@ -1,5 +1,6 @@
 package majiang.com.example.myproject.controller;
 
+import majiang.com.example.myproject.dto.PaginationDTO;
 import majiang.com.example.myproject.dto.QuestionDTO;
 import majiang.com.example.myproject.mapper.QuestionMapper;
 import majiang.com.example.myproject.model.Question;
@@ -17,12 +18,16 @@ import java.util.List;
 public class IndexController {
     @Autowired
     private QuestionService questionService;
+
     @GetMapping("/")
     public String index(
-            Model model
+            Model model,
+            @RequestParam(name = "page", defaultValue = "1") Integer page,
+            @RequestParam(name = "size", defaultValue = "5") Integer size
+
     ) {
-        List<QuestionDTO> questionDTOList = questionService.list();
-        model.addAttribute("questions", questionDTOList);
+        PaginationDTO pagination = questionService.list(page, size);
+        model.addAttribute("pagination", pagination);
         return "index";
 
     }

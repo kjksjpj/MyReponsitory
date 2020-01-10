@@ -1,5 +1,6 @@
 package majiang.com.example.myproject.mapper;
 
+import majiang.com.example.myproject.dto.QuestionDTO;
 import majiang.com.example.myproject.model.Question;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -27,4 +28,7 @@ public interface QuestionMapper {
 
     @Select("select * from question where creator = #{userId} limit #{offset}, #{size}")
     List<Question> listByUserId(Integer userId, Integer offset, Integer size);
+
+    @Select("select * from question where id = #{id}")
+    Question getById(Integer id);
 }

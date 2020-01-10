@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${question.title}"></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="css/mycommunity.css">
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <script src="/js/jquery-3.4.1.min.js"></script>
+    <script src="/js/bootstrap.min.js" type="application/javascript"></script>
+
+    <!--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">-->
+    <!--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>-->
+</head>
+<body>
+<div th:insert="~{navigation :: nav}"></div>
+<div class="main profile container-fluid">
+    <div class="row">
+        <div calss="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+            <h4 th:text="${question.title}"></h4>
+            <span class="text-desc">
+                作者：<span th:text="${question.user.name}"></span> |
+                发布时间：<span th:text="${#calendars.format(question.gmtCreate, 'yyyy-MM-dd HH:mm')}"></span> |
+                阅读数：<span th:text="${question.viewCount}"></span>
+            </span>
+            <hr>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" th:text="${question.description}"></div>
+            <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <a th:href="@{'/publish/'+${question.id}}" class="community-menu">
+                <span class="glyphicon glyphicon-pencil" aria-hidden="true">
+                编辑
+                </span>
+            </a>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <h4>发起人</h4>
+                <div class="media">
+                    <div class="media-left">
+                        <a href="#">
+                            <img class="media-object img-circle" src="https://cm.bilibili.com/cm/api/fees/pc/sync/v2?msg=a%7C2628%2Cb%7Cbilibili%2Cc%7C1%2Cd%7C1%2Ce%7CCAAQABiAoLP9tOvXrAQgACgAMB04xBRCHjE1Nzg2NTQzOTEzMzZxMTcyYTIyYTUwYTk2cTI1NUiouIn5%2BC1SBumHkeWNjloG5rWZ5rGfYgbkuK3lm71oAXAAeICAgICgDYABAIgBmlKSAQ02MS4xNTMuMzQuMTA5mgHsBWFsbDpjcGNfY3Jvd2RfdGFyZ2V0LGVjcG06ZGVmYXVsdCxjcGNUYWdGaWx0ZXI6dW5kZWZpbmVkLHBsYXlwYWdlY3RyOmVuYWJsZSxub19hZF9mbG93X2NvbnRyb2w6dW5kZWZpbmVkLGJydXNoX2R1cGxpY2F0ZTpkZWZhdWx0LHBjdHJfY3BtOmNwbSxwY3RyX3YyOmxyX2NvbnN0YW50LGR5bmFtaWNfZmxvd19jb250cm9sOnNwbGl0IHRoZSBmbG93IGJ5IG1pZCxwY3ZyOmRsZCxmcmVxTGltaXQ6ZGVmYXVsdCxzbWFsbENvbnN1bWVVbml0OmRlZmF1bHQsb3V0ZXJCZWF0SW5uZXI6ZGVmYXVsdCxvdXRlclF1aXQ6ZGVmYXVsdCxmZHNfcnR0OjUwLGNwYTpjcGFfa2V5MSxpbmRpc19VVjp1bmRlZmluZWQsaGFzaF9pbmRpc19VVjp1bmRlZmluZWQsZmVlZHNfcmFuZG9tX3Jlc3VsdDpkZWZhdWx0LGZsb3dfcmF0aW9fY2hlY2s6cjEsYmFzZV9oYXNoX2luZGlzX1VWOnVuZGVmaW5lZCxkbXBfYWdlX2V4cDpkbXAsY29sZF9ib290X2V4cDpkZWZhdWx0LG50aF9icnVzaF9ldmVudDpkZWZhdWx0LGxvd19xdHlfY3JlYXRpdmU6bG93X3F0eSxmcmVxX3N0eWxfY2FyZDpkZWZhdWx0LGR1cF9hZF9jb250cm9sOmRlZmF1bHQsYnJ1c2hfYWRfY29udHJvbDpkZWZhdWx0LG5lZ2F0aXZlRmVkQmFjazpkZWZhdWx0LGRlZmF1bHRBZ2U6cmVhbCxleHBfcGVyc29uYWxfdXA6cGVyc29uYWx1cF9hY2MsZmlsdGVyT3B0Om9wZW4saW5uZXJfZW5oYW5jZTpvcGVuLGZyZXFfY29tX3BkdF9leHA6dW5kZWZpbmVkLHBsYXRmb3JtOmRlZmF1bHSgAQCoAQCyASByPekQNa9W2KNE14BxcDt1h8y0%2FUGaTjtxkQWkA1oc57oB3AJodHRwczovL2UuY24ubWlhb3poZW4uY29tL3Ivaz0yMTUyMTczJnA9N1ZyMWYmZHg9X19JUERYX18mcnQ9MiZucz02MS4xNTMuMzQuMTA5Jm5pPV9fSUVTSURfXyZ2PV9fTE9DX18meGE9X19BRFBMQVRGT1JNX18mdHI9MTU3ODY1NDM5MTMzNnExNzJhMjJhNTBhOTZxMjU1JnJvPXNtJm1vPTMmbTA9X19PUEVOVURJRF9fJm0wYT1fX0RVSURfXyZtMT1fX0FORFJPSURJRDFfXyZtMWE9X19BTkRST0lESURfXyZtMj1fX0lNRUlfXyZtND1fX0FBSURfXyZtNT1fX0lERkFfXyZtNj1fX01BQzFfXyZtNmE9X19NQUNfXyZtMTE9X19PQUlEX18mbz1odHRwczovL3d3dy5jYWRpbGxhYy5jb20uY24vc2VkYW4vY3Q1Lmh0bWzCAQDSAQDYAWrgAQDoAQDwAQD4AQCAAgCIAgC4AgDAAgDIAgDQAgDYAgDqAgDwAu2mBfgCAIgDAZIDAKgDALADALgDAMIDAMgDF9IDQXsiMSI6IjMxMzM4NjQ5NDg2MjM0ODI4OCIsIjIiOiIyOSIsIjQiOiI2MyIsIjUiOiIxMDciLCI2IjoiMjlfMCJ9%2Cf%7Cclick_sync_3%2Cg%7C1%2Ch%7C3%2Ci%7C11272126%2Cj%7C%2Ck%7C1578663293321%2Cl%7C2624%2Cm%7C1578631646982%2Cn%7C1%2Co%7C&ts=1578663293321"
+                                 alt="...">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">
+                            <apan th:text="${question.user.name}"></apan>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><h4>相关问题</h4>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

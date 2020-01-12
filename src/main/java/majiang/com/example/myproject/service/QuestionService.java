@@ -3,8 +3,11 @@ package majiang.com.example.myproject.service;
 import majiang.com.example.myproject.dto.PaginationDTO;
 import majiang.com.example.myproject.dto.QuestionDTO;
 import majiang.com.example.myproject.mapper.QuestionMapper;
+
 import majiang.com.example.myproject.mapper.UserMapper;
 import majiang.com.example.myproject.model.Question;
+
+
 import majiang.com.example.myproject.model.User;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +42,7 @@ public class QuestionService {
         List<Question> questions = questionMapper.list(offset, size);
         List<QuestionDTO> questionDTOList = new ArrayList<>();
         for (Question question : questions) {
-            User user = userMapper.findById(question.getCreator());
+            User user = userMapper.selectByPrimaryKey(question.getCreator());
             QuestionDTO questionDTO = new QuestionDTO();
             BeanUtils.copyProperties(question, questionDTO);
             questionDTO.setUser(user);
@@ -68,7 +71,7 @@ public class QuestionService {
         List<Question> questions = questionMapper.listByUserId(userId, offset, size);
         List<QuestionDTO> questionDTOList = new ArrayList<>();
         for (Question question : questions) {
-            User user = userMapper.findById(question.getCreator());
+            User user = userMapper.selectByPrimaryKey(question.getCreator());
             QuestionDTO questionDTO = new QuestionDTO();
             BeanUtils.copyProperties(question, questionDTO);
             questionDTO.setUser(user);
@@ -83,8 +86,19 @@ public class QuestionService {
         Question question = questionMapper.getById(id);
         QuestionDTO questionDTO = new QuestionDTO();
         BeanUtils.copyProperties(question, questionDTO);
-        User user = userMapper.findById(question.getCreator());
+        User user = userMapper.selectByPrimaryKey(question.getCreator());
         questionDTO.setUser(user);
         return questionDTO;
+    }
+
+    public void createOrUpdate(Question question) {
+        if(question.getId() == null){
+            //创建
+            question.setGmtCreate(System.currentTimeMillis());
+            questionMapper.create(question);
+        } else {
+            //更新
+            questionMapper.update(question);
+        }
     }
 }

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <context id="DB2Tables" targetRuntime="MyBatis3">
+        <jdbcConnection driverClass="org.h2.Driver"
+                        connectionURL="jdbc:h2:~/myproject"
+                        userId="sa"
+                        password="123">
+        </jdbcConnection>
+
+        <javaTypeResolver >
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+<!--        下面的参数是用来自动生成model的-->
+        <javaModelGenerator targetPackage="majiang.com.example.myproject.model" targetProject="src\main\java">
+<!--            true会根据路径生成子包-->
+            <property name="enableSubPackages" value="true" />
+<!--            把空格trim掉-->
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+
+        <sqlMapGenerator targetPackage="mapper"  targetProject="src\main\resources">
+<!--            是true的时候会自动创建-->
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+
+<!--        生成java的interface-->
+<!--        type是默认的不用管-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="majiang.com.example.myproject.mapper"  targetProject="src\main\java">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+
+
+        <table tableName="user" domainObjectName="User">
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+
+
+    </context>
+</generatorConfiguration>

@@ -29,6 +29,10 @@ body {
 }
 
 .community-menu {
-    color : #d0d0d0;
+    color: #d0d0d0;
     font-size: 13px;
+}
+
+.jumbotron {
+    margin: 50px;
 }

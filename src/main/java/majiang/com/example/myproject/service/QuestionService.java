@@ -2,6 +2,8 @@ package majiang.com.example.myproject.service;
 
 import majiang.com.example.myproject.dto.PaginationDTO;
 import majiang.com.example.myproject.dto.QuestionDTO;
+import majiang.com.example.myproject.exception.CustomizeErrorCode;
+import majiang.com.example.myproject.exception.CustomizeException;
 import majiang.com.example.myproject.mapper.QuestionMapper;
 
 import majiang.com.example.myproject.mapper.UserMapper;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+
 @Service
 public class QuestionService {
     @Autowired
@@ -84,6 +87,9 @@ public class QuestionService {
 
     public QuestionDTO getById(Integer id) {
         Question question = questionMapper.getById(id);
+        if (question == null) {
+            throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
+        }
         QuestionDTO questionDTO = new QuestionDTO();
         BeanUtils.copyProperties(question, questionDTO);
         User user = userMapper.selectByPrimaryKey(question.getCreator());
@@ -92,13 +98,17 @@ public class QuestionService {
     }
 
     public void createOrUpdate(Question question) {
-        if(question.getId() == null){
+        if (question.getId() == null) {
             //创建
             question.setGmtCreate(System.currentTimeMillis());
             questionMapper.create(question);
         } else {
             //更新
-            questionMapper.update(question);
+            int updated = questionMapper.update(question);
+            //没有更新的时候也需要抛出异常
+            if (updated != 1) {
+                throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
+            }
         }
     }
 }

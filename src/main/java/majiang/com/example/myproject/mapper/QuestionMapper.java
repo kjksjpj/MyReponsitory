@@ -1,11 +1,9 @@
 package majiang.com.example.myproject.mapper;
 
-import majiang.com.example.myproject.dto.QuestionDTO;
 import majiang.com.example.myproject.model.Question;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
 
-import java.sql.ClientInfoStatus;
 import java.util.List;
 
 @Mapper
@@ -30,5 +28,5 @@ public interface QuestionMapper {
     Question getById(Integer id);
 
     @Update("update question set title = #{title}, description = #{description}, gmt_create = #{gmtCreate}, gmt_modified = #{gmtModified}, creator = #{creator}, tag = #{tag} where id = #{id}")
-    void update(Question question);
+    int update(Question question);
 }

@@ -4,6 +4,7 @@ import majiang.com.example.myproject.dto.PaginationDTO;
 import majiang.com.example.myproject.dto.QuestionDTO;
 import majiang.com.example.myproject.exception.CustomizeErrorCode;
 import majiang.com.example.myproject.exception.CustomizeException;
+import majiang.com.example.myproject.mapper.QuestionExtMapper;
 import majiang.com.example.myproject.mapper.QuestionMapper;
 
 import majiang.com.example.myproject.mapper.UserMapper;
@@ -27,6 +28,9 @@ public class QuestionService {
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private QuestionExtMapper questionExtMapper;
 
     public PaginationDTO list(Integer page, Integer size) {
         Integer totalPage;
@@ -129,12 +133,10 @@ public class QuestionService {
     }
 
     public void incView(Integer id) {
-        Question question = questionMapper.selectByPrimaryKey(id);
-        Question updateQuestion = new Question();
-        updateQuestion.setViewCount(question.getViewCount() + 1);
-        QuestionExample questionExample = new QuestionExample();
-        questionExample.createCriteria()
-                .andIdEqualTo(id);
-        questionMapper.updateByExampleSelective(updateQuestion, questionExample);
+        Question question = new Question();
+        question.setId(id);
+        question.setViewCount(1);
+        questionExtMapper.incView(question);
+
     }
 }

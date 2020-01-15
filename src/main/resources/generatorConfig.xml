@@ -5,13 +5,14 @@
 
 <generatorConfiguration>
     <context id="DB2Tables" targetRuntime="MyBatis3">
+        <plugin type="org.mybatis.generator.plugins.RowBoundsPlugin"></plugin>
         <jdbcConnection driverClass="org.h2.Driver"
                         connectionURL="jdbc:h2:~/myproject"
                         userId="sa"
                         password="123">
         </jdbcConnection>
 
-        <javaTypeResolver >
+        <javaTypeResolver>
             <property name="forceBigDecimals" value="false" />
         </javaTypeResolver>
 <!--        下面的参数是用来自动生成model的-->
@@ -36,6 +37,9 @@
 
 
         <table tableName="user" domainObjectName="User">
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+        <table tableName="question" domainObjectName="Question">
             <property name="useActualColumnNames" value="false"/>
         </table>
 
